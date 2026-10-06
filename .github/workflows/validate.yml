@@ -1,0 +1,58 @@
+name: Validate Antigravity plugin
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+env:
+  AGY_VERSION: 1.2.17
+  AGY_URL: https://storage.googleapis.com/antigravity-public/antigravity-cli/1.2.17-6683332533157888/linux-x64/cli_linux_x64.tar.gz
+  AGY_SHA512: d0ebe612f7cfc21c8de9e7a7a62964b2245d89ddb570d5e27e83e61a2cc76cb38e80b6eb3bdd71bef683eba027c4a97dcce4ced81f47f827763234d0cd3ec592
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Antigravity CLI
+        run: |
+          mkdir -p "$RUNNER_TEMP/agy" "$RUNNER_TEMP/agy-home"
+          curl -fsSL -o "$RUNNER_TEMP/agy/cli.tar.gz" "$AGY_URL"
+          echo "$AGY_SHA512  $RUNNER_TEMP/agy/cli.tar.gz" | sha512sum --check --strict
+          tar -xzf "$RUNNER_TEMP/agy/cli.tar.gz" -C "$RUNNER_TEMP/agy" antigravity
+          echo "AGY=$RUNNER_TEMP/agy/antigravity" >> "$GITHUB_ENV"
+          echo "HOME=$RUNNER_TEMP/agy-home" >> "$GITHUB_ENV"
+
+      - name: Validate plugin
+        run: '"$AGY" plugin validate plugins/mrscraper'
+
+      - name: Install plugin and confirm its skills load
+        env:
+          # /skills is answered locally without a model call; the CLI only
+          # requires GEMINI_API_KEY to be non-empty when modelProvider=gemini.
+          GEMINI_API_KEY: unused-by-skills-listing
+        run: |
+          "$AGY" plugin install plugins/mrscraper
+          mkdir -p "$HOME/.gemini/antigravity-cli"
+          echo '{"modelProvider": "gemini"}' > "$HOME/.gemini/antigravity-cli/settings.json"
+          "$AGY" -p "/skills" --output-format json > "$RUNNER_TEMP/skills.json"
+          python3 - "$RUNNER_TEMP/skills.json" <<'PY'
+          import json, sys
+
+          raw = open(sys.argv[1], encoding="utf-8").read()
+          skills = json.loads(raw[raw.index("{"):])["command"]["data"]["skills"]
+          loaded = {s["name"]: s for s in skills if s.get("plugin") == "mrscraper"}
+          expected = {f"mrscraper:{name}" for name in ("mrscraper", "mrscraper-fetch", "mrscraper-scrape", "mrscraper-serp")}
+          missing = expected - set(loaded)
+          empty = [name for name in expected & set(loaded) if not loaded[name].get("description", "").strip()]
+          if missing or empty:
+              sys.exit(f"missing skills: {sorted(missing)}; skills without description: {sorted(empty)}")
+          print("Loaded:", ", ".join(sorted(loaded)))
+          PY

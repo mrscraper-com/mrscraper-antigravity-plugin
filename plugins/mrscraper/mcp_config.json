@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "mrscraper": {
+      "serverUrl": "https://mcp.mrscraper.com/mcp"
+    }
+  }
+}
