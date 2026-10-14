@@ -49,7 +49,7 @@ jobs:
           raw = open(sys.argv[1], encoding="utf-8").read()
           skills = json.loads(raw[raw.index("{"):])["command"]["data"]["skills"]
           loaded = {s["name"]: s for s in skills if s.get("plugin") == "mrscraper"}
-          expected = {f"mrscraper:{name}" for name in ("mrscraper", "mrscraper-fetch", "mrscraper-scrape", "mrscraper-serp")}
+          expected = {f"mrscraper:{name}" for name in ("mrscraper", "mrscraper-fetch", "mrscraper-serp")}
           missing = expected - set(loaded)
           empty = [name for name in expected & set(loaded) if not loaded[name].get("description", "").strip()]
           if missing or empty:

@@ -20,7 +20,8 @@ Use this checklist for a public MrScraper Antigravity plugin release.
 
 - [ ] Confirm the GitHub validation workflow passes.
 - [ ] Install the plugin from the public repository in a clean Antigravity
-      profile, complete OAuth, and confirm all seven MCP tools load.
+      profile, complete OAuth, and confirm the `scraperAPI`, `webSearch`, and
+      `status` tools load.
 - [ ] Run the smoke-test prompt below.
 - [ ] Create the matching Git tag and GitHub release for an explicit semantic
       version.
@@ -42,19 +43,19 @@ Keep these values ready for Google:
 | Terms of use | `https://mrscraper.com/terms-of-use` |
 | MCP endpoint | `https://mcp.mrscraper.com/mcp` (Streamable HTTP) |
 | Authentication | OAuth 2.1 with dynamic client registration and client ID metadata documents |
-| Components | 1 MCP server, 4 skills |
+| Components | 1 MCP server, 3 skills |
 
 Suggested description:
 
-> Connect your agent to MrScraper for raw page fetching, managed structured
-> extraction, Google discovery, and reusable saved scraper workflows. The
-> included skills preserve source responses with a fetch-first workflow before
-> adding backend extraction when it is explicitly requested or clearly useful.
+> Connect your agent to MrScraper to retrieve public web pages as HTML,
+> Markdown, or screenshots, discover sources through Google, and check account
+> usage. The included skills preserve source responses with a retrieve-first
+> workflow and derive structured output locally.
 
-The hosted service receives target URLs and tool inputs, including extraction
-instructions. Results are returned to the agent for the user's requested task.
-The OAuth connection can grant `scrape:read`, `scrape:write`, and
-`account:read` access. The plugin contains no static credentials.
+The hosted service receives target URLs and tool inputs, including search
+queries. Results are returned to the agent for the user's requested task. The
+OAuth connection can grant `scrape:read` and `account:read` access. The plugin
+contains no static credentials.
 
 Smoke-test prompt:
 

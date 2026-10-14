@@ -1,4 +1,4 @@
 {
   "name": "mrscraper",
-  "description": "Connect Antigravity to MrScraper for raw page fetching, managed extraction, Google discovery, and saved scraper workflows."
+  "description": "Connect Antigravity to MrScraper to retrieve web pages as HTML, Markdown, or screenshots, discover pages through Google, and check account usage."
 }
