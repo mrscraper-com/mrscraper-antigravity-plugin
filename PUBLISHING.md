@@ -54,8 +54,8 @@ Suggested description:
 
 The hosted service receives target URLs and tool inputs, including search
 queries. Results are returned to the agent for the user's requested task. The
-OAuth connection can grant `scrape:read` and `account:read` access. The plugin
-contains no static credentials.
+OAuth connection can grant `scrape:read`, `scrape:write`, and `account:read`
+access. The plugin contains no static credentials.
 
 Smoke-test prompt:
 
