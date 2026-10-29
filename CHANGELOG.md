@@ -4,6 +4,13 @@ All notable changes to the MrScraper Antigravity plugin are documented here.
 The project follows [Semantic Versioning](https://semver.org/); each release is
 a Git tag because Antigravity's `plugin.json` has no version field.
 
+## 0.2.2 - 2026-10-29
+
+- Reworded search as web search in the plugin
+  description, README, publishing notes, and skills.
+  The `webSearch` tool is unchanged. The skills now differ from the MrScraper
+  Claude plugin 0.2.2 only in this wording.
+
 ## 0.2.1 - 2026-10-22
 
 - Updated the `mrscraper` skill and the docs for the hosted server's three
