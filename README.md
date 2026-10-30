@@ -1,7 +1,7 @@
 # MrScraper for Google Antigravity
 
 MrScraper connects Google Antigravity to a hosted MCP server for retrieving
-public web pages as HTML, Markdown, or screenshots, Google discovery, and
+public web pages as HTML, Markdown, or screenshots, web search, and
 account usage. The plugin also includes three focused skills that help the
 agent choose the right workflow and preserve raw page content.
 
@@ -83,7 +83,7 @@ The connection should expose these MCP tools:
 | Tool | Purpose |
 | --- | --- |
 | `scraperAPI` | Retrieve a known page as HTML, Markdown, a screenshot, or a combination. |
-| `webSearch` | Discover public pages through Google. |
+| `webSearch` | Discover public pages through web search. |
 | `status` | Inspect subscription status, token usage, and remaining tokens. |
 
 Antigravity asks for approval before running MCP tools unless your permission
