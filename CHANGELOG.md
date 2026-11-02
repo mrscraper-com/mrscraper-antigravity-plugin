@@ -4,6 +4,16 @@ All notable changes to the MrScraper Antigravity plugin are documented here.
 The project follows [Semantic Versioning](https://semver.org/); each release is
 a Git tag because Antigravity's `plugin.json` has no version field.
 
+## 0.3.0 - 2026-11-02
+
+- Updated the `mrscraper-serp` skill for MrScraper MCP server 0.3.0, which
+  moved `webSearch` to MrScraper's new web search endpoint. Results are a
+  ranked list (rank, title, url, description, source); `region` sets the
+  results' country and the new `num_results` asks for 10 to 100 results. The
+  `raw`, `format`, `language`, `page`, and `render_js` options are gone, and
+  so is the search results URL example. Skills are identical to the MrScraper
+  Claude plugin 0.3.0.
+
 ## 0.2.2 - 2026-10-29
 
 - Reworded search as web search in the plugin
