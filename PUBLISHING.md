@@ -20,8 +20,9 @@ Use this checklist for a public MrScraper Antigravity plugin release.
 
 - [ ] Confirm the GitHub validation workflow passes.
 - [ ] Install the plugin from the public repository in a clean Antigravity
-      profile, complete OAuth, and confirm the `scraperAPI`, `webSearch`, and
-      `status` tools load.
+      profile, complete OAuth, and confirm the `status`, `scrapeHtml`,
+      `scrapeMarkdown`, `getScreenshot`, `scrapeBrand`, `scrapeJson`, and
+      `webSearch` tools load.
 - [ ] Run the smoke-test prompt below.
 - [ ] Create the matching Git tag and GitHub release for an explicit semantic
       version.
@@ -54,13 +55,14 @@ Suggested description:
 
 The hosted service receives target URLs and tool inputs, including search
 queries. Results are returned to the agent for the user's requested task. The
-OAuth connection can grant `scrape:read`, `scrape:write`, and `account:read`
-access. The plugin contains no static credentials.
+OAuth connection can grant `scraper:read` (the six scraping and search tools)
+and `account:read` (`status`) access. The plugin contains no static
+credentials.
 
 Smoke-test prompt:
 
 ```text
-Fetch https://www.scrapethissite.com/pages/simple/ and summarize the page.
+Fetch https://www.scrapethissite.com and summarize the page.
 ```
 
 ## Submit to Google
