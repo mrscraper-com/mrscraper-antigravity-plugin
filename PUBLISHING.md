@@ -55,7 +55,7 @@ Suggested description:
 
 The hosted service receives target URLs and tool inputs, including search
 queries. Results are returned to the agent for the user's requested task. The
-OAuth connection can grant `scraper:read` (the six scraping and search tools)
+OAuth connection can grant `scrape:read` (the six scraping and search tools)
 and `account:read` (`status`) access. The plugin contains no static
 credentials.
 

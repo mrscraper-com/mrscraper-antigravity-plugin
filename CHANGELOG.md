@@ -16,11 +16,9 @@ a Git tag because Antigravity's `plugin.json` has no version field.
   instead of `url`, `region`, `num_results`, and `timeout`, and all tool
   inputs are camelCase. Skills are identical to the MrScraper Claude 0.4.0,
   Cursor 0.5.0, Grok 0.4.0, and OpenCode 0.5.0 plugins.
-- The hosted server now uses two OAuth scopes: `scraper:read` for the six
-  scraping and search tools and `account:read` for `status`. Connections
-  authorized with the older `scrape:read` and `scrape:write` scopes must sign
-  in again (**Authenticate** in **Customizations**, or `/mcp` in the CLI) so
-  Antigravity requests `scraper:read`.
+- The hosted server now uses two OAuth scopes: `scrape:read` for the six
+  scraping and search tools and `account:read` for `status`. Connections that
+  already hold `scrape:read` keep working; `scrape:write` is no longer needed.
 
 ## 0.3.0 - 2026-11-02
 
